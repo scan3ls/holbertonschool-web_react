@@ -54,5 +54,5 @@ export function executeWork(employee: DirectorInterface | TeacherInterface) {
 type Subjects = 'Math' | 'Histroy';
 
 export function teachClass(todayClass: Subjects) {
-    if (['Math', 'History'].indexOf(todayClass) > 0) return `Teaching ${todayClass}`;
+    if (['Math', 'History'].indexOf(todayClass) >= 0) return `Teaching ${todayClass}`;
 }
