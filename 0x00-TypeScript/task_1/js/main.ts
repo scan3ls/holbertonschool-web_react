@@ -16,7 +16,9 @@ interface printTeacherFunction {
 }
 
 const printTeacher: printTeacherFunction = (firstName:string, lastName: string) => {
-    return `${firstName[0]}. ${lastName}`;
+    const value = `${firstName[0]}. ${lastName}`;
+    console.log(value);
+    return value;
 }
 
 interface IStudent {
@@ -25,7 +27,6 @@ interface IStudent {
     workOnHomework(): string;
     displayName(): string;
 }
-
 
 interface IStudentConstructor {
     new (firstName: string, lastName: string): IStudent;
