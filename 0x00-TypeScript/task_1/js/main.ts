@@ -16,7 +16,7 @@ interface printTeacherFunction {
 }
 
 const printTeacher: printTeacherFunction = (firstName:string, lastName: string) => {
-    const value = `${firstName[0]}. ${lastName}`;
+    const value: string = `${firstName[0]}. ${lastName}`;
     console.log(value);
     return value;
 }
