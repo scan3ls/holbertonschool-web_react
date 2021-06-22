@@ -1,10 +1,10 @@
 // credit: number;
-interface MajorCredits {
+export interface MajorCredits {
     credits: number;
     brand: 'major';
 }
 
-interface MinorCredits {
+export interface MinorCredits {
     credits: number;
     brand: 'minor';
 }
