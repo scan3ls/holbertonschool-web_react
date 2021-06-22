@@ -1,8 +1,11 @@
+// export const cpp: Subjects.Cpp = new Subjects.Cpp();
+// export const java: Subjects.Java = new Subjects.Java();
+// export const react: Subjects.React = new Subjects.React();
 namespace Subjects {
-    export const cpp: Subjects.Cpp = new Subjects.Cpp();
-    export const java: Subjects.Java = new Subjects.Java();
-    export const react: Subjects.React = new Subjects.React();
-    export const teacher: Subjects.Teacher = {
+    export const cpp: Cpp = new Cpp();
+    export const java: Java = new Java();
+    export const react: React = new React();
+    export const teacher: Teacher = {
         firstName: 'Logan',
         lastName: 'Scanlon',
         experienceTeachingC: 10
