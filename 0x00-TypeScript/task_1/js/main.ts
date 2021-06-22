@@ -30,7 +30,7 @@ interface IStudentConstructor {
     new (firstName: string, lastName: string): IStudent;
 }
 
-class StudentClass implements IStudent{
+export class StudentClass implements IStudent{
     firstName: string;
     lastName: string;
 
