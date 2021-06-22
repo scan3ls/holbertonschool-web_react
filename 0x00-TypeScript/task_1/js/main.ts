@@ -15,10 +15,8 @@ interface printTeacherFunction {
     (firstName: string, lastName: string): string;
 }
 
-const printTeacher: printTeacherFunction = (firstName:string, lastName: string) => {
-    const value: string = `${firstName[0]}. ${lastName}`;
-    console.log(value);
-    return value;
+export const printTeacher: printTeacherFunction = (firstName:string, lastName: string) => {
+    return `${firstName[0]}. ${lastName}`;
 }
 
 interface IStudent {
