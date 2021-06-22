@@ -50,3 +50,9 @@ export function isDirector(employee: any): employee is Director {
 export function executeWork(employee: DirectorInterface | TeacherInterface) {
     return (isDirector(employee) ? employee.workDirectorTasks() : employee.workTeacherTasks());
 }
+
+type Subjects = 'Math' | 'Histroy';
+
+export function teachClass(todayClass: Subjects) {
+    return `Teaching ${todayClass}`;
+}
