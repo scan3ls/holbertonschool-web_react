@@ -40,5 +40,13 @@ export class Teacher implements TeacherInterface {
 
 export function createEmployee(salary: string | number) {
     if (typeof salary === 'string') salary = parseInt(salary);
-    return ( salary < 500 ? new Teacher() : new Director());
+    return ( salary < 500 ? new Teacher : new Director);
 };
+
+export function isDirector(employee: any): employee is Director {
+    return employee instanceof Director;
+}
+
+export function executeWork(employee: DirectorInterface | TeacherInterface) {
+    return (isDirector(employee) ? employee.workDirectorTasks() : employee.workTeacherTasks());
+}
