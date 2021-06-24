@@ -9,6 +9,10 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
             { 
                 test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 use: [
@@ -21,10 +25,6 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
             }
         ]
     }
