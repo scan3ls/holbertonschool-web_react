@@ -1,5 +1,5 @@
 const path = require('path');
-
+// "html-webpack-plugin", "clean-webpack-plugin" "inline-source-map" "all"
 module.exports = {
     mode: 'development',
     entry: [
