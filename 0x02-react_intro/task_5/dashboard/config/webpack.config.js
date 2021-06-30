@@ -3,12 +3,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Webpack Output',
-        }),
-        new CleanWebpackPlugin()
-    ],
+    // plugins: [
+    //     // new HtmlWebpackPlugin({
+    //     //     title: 'Webpack Output',
+    //     // }),
+    //     // new CleanWebpackPlugin()
+    // ],
     entry: {
         main: path.resolve(__dirname, '../src/index.js')
     },
