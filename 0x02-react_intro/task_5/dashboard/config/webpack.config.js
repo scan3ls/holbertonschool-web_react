@@ -17,9 +17,7 @@ module.exports = {
         path: path.resolve(__dirname, '../dist')
     },
     devServer: {
-        inline: false,
-        contentBase: '../dist',
-        open: true,
+        contentBase: path.resolve(__dirname, '../dist'),
         hot: true
     },
     module: {
@@ -42,13 +40,13 @@ module.exports = {
             ]
           },
           {
-            test: /\.m?jsx?$/,
+            test: /.jsx?$/,
             exclude: /(node_modules|bower_components)/,
             use: {
               loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env']
-              }
+              // options: {
+              //   presets: ['@babel/preset-env']
+              // }
             }
           },
         ]
