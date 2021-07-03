@@ -1,0 +1,17 @@
+:root {
+    --priority-default: rgb(5, 29, 163);
+    --priority-urgent: rgb(211, 64, 64);
+}
+
+.Notifications {
+    border: 1px dashed var(--priority-urgent);
+    padding: 1rem;
+}
+
+li[data-priority="default"] {
+    color: var(--priority-default);
+}
+
+li[data-priority="urgent"] {
+    color: var(--priority-urgent);
+}
