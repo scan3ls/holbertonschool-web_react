@@ -9,28 +9,3 @@
 .App {
   padding: 0rem 0.5rem;
 }
-
-.App-header {
-  display: flex;
-  color: var(--holby-red);
-  text-align: center;
-  align-items: center;
-}
-
-.App-logo {
-  height: var(--logo-size);
-  width: var(--logo-size);
-}
-
-.App-body {
-  border-top: var(--body-border);
-  border-bottom: var(--body-border);
-  min-height: var(--min-body-height);
-  padding: var(--body-padding);
-}
-
-.App-footer {
-  text-align: center;
-  font-weight: bold;
-  font-style: italic;
-}
