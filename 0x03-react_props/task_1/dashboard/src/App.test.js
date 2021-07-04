@@ -1,19 +1,10 @@
 import App from './App';
+import Header from './Header/Header';
+import Login from './Login/Login';
+import Footer from './Footer/Footer';
+import Notification from './Notifications';
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-
-const getChild = (className) => {
-    const wrapper = render(<App />);
-    const children = wrapper['0'].children;
-    let node = undefined;
-    children.forEach(child => {
-        if(child.attribs.class === className) {
-            node = child;
-            return;
-        }
-    });
-    return node;
-};
 
 describe('App', () => {
     it('Does not crash', () => {
@@ -23,7 +14,7 @@ describe('App', () => {
 
     describe('App-header', () => {
         it('App renders div with class App-header', () => {
-            const node = getChild('App-header');
+            const node = shallow(<Header />).render()['0'];
             expect(node.type).toBe('tag');
             expect(node.name).toBe('div');
             expect(node.attribs.class).toBe('App-header');
@@ -33,7 +24,7 @@ describe('App', () => {
 
     describe('App-body', () => {
         it('App renders div with class App-body', () => {
-            const node = getChild('App-body');
+            const node = shallow(<Login />).render()['0'];
             expect(node.type).toBe('tag');
             expect(node.name).toBe('div');
             expect(node.attribs.class).toBe('App-body');
@@ -42,10 +33,17 @@ describe('App', () => {
 
     describe('App-footer', () => {
         it('App renders div with class App-footer', () => {
-            const node = getChild('App-footer');
+            const node = shallow(<Footer />).render()['0'];
             expect(node.type).toBe('tag');
             expect(node.name).toBe('div');
             expect(node.attribs.class).toBe('App-footer');
+        });
+    });
+
+    describe('Notifications', () => {
+        it('Notifications', () => {
+            const node = shallow(<Footer />).render()['0'];
+            expect(node);
         });
     });
 });
