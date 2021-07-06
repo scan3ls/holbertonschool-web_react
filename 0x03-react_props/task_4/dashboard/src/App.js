@@ -4,14 +4,29 @@ import Header from './Header/Header';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Notifications from './Notifications/Notifications';
+import CourseList from './CourseList/CourseList';
 
-function App() {
+function Body(props) {
+  if (props.isLoggedIn) {
+    return (
+      <CourseList />
+    );
+  } else {
+    return (
+      <Login />
+    );
+  }
+}
+
+function App(props) {
+  const isLoggedIn = (props.isLoggedIn) ? props.isLoggedIn : false;
+
   return (
     <React.Fragment>
-      <Notifications />
+      <Notifications displayDrawer={true} />
       <div className="App">
         <Header />
-        <Login />
+        <Body isLoggedIn={isLoggedIn}/>
         <Footer />
       </div>
     </React.Fragment>

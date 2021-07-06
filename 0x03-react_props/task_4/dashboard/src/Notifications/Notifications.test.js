@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 import Notifications from './Notifications';
 import assert from 'assert';
 
@@ -10,15 +10,14 @@ describe('Notifications', () => {
     });
 
     it('Here is the list message', () => {
-        const wrapper = shallow(<Notifications />);
-        const children = wrapper.render().children().toArray();
-        const message = children[1].firstChild;
+        const wrapper = render(<Notifications />);
+        const message = wrapper.find('.Notifications p')[0].children[0];
         assert.equal(message.data, 'Here is the list of notifications');
     });
 
     it('Has three list elements', () => {
-        const wrapper = shallow(<Notifications />);
-        const list = wrapper.render().children()['2'];
+        const wrapper = render(<Notifications />);
+        const list = wrapper.find('.Notifications ul')[0]
         const listItems = list.children;
         assert.equal(listItems.length, 3);
     });

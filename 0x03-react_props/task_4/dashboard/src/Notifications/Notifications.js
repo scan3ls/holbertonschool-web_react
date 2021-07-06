@@ -9,10 +9,10 @@ const button_click = () => {
 };
 
 const button_style = {
-    display: 'inline',
-    position: 'absolute',
-    right: '0.1rem',
-    top: '0.1rem',
+    position: 'relative',
+    left: '97%',
+    width: '1rem',
+    height: '1rem',
     margin: '1px 1px',
     border: 'none',
     backgroundColor: 'rgba(0, 0, 0, 0.0)',
@@ -28,22 +28,28 @@ const list_style = {
     listStyle: 'disc'
 };
 
-export default function Notifications() {
+const notification_style = {
+    display: 'flex'
+}
+export default function Notifications(props) {
+    const hidden = !props.displayDrawer;
+
     return (
-        <div className="Notifications">
-            <button style={button_style} aria-label="Close" onClick={button_click}>
-                <img style={img_style} src={closeIcon} alt="close-img"></img>
-            </button>
-            <p>Here is the list of notifications</p>
-            <ul style={list_style}>
-                {NotificationItem('default', 'New course available', undefined)}
-                {NotificationItem('urgent', 'New course available', undefined)}
-                {NotificationItem('urgent', 'New course available', getLatestNotification())}
-                
-                {/* <li data-priority="default">New course available</li>
-                <li data-priority="urgent">New resume available</li>
-                <li data-priority="urgent" dangerouslySetInnerHTML={{__html: getLatestNotification() }} /> */}
-            </ul>
+        <div className="main_notice">
+            <div className="menuItems">
+                <p>Your notifications</p>
+            </div>
+            <div hidden={hidden} className="Notifications">
+                <button style={button_style} aria-label="Close" onClick={button_click}>
+                    <img style={img_style} src={closeIcon} alt="close-img"></img>
+                </button>
+                <p>Here is the list of notifications</p>
+                <ul style={list_style}>
+                    <NotificationItem type="default" value="New course available"/>
+                    <NotificationItem type="urgent" value="New course available"/>
+                    <NotificationItem type="urgent" value="New course available" html={getLatestNotification()}/>
+                </ul>
+            </div>
         </div>
     );
 }

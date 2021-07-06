@@ -12,6 +12,12 @@ describe('App', () => {
         expect(wrapper);
     });
 
+    it('Does not contain CourseList', () => {
+        const wrapper = render(<App />);
+        const courselist = wrapper.find('#CourseList');
+        expect(courselist.length).toBe(0);
+    });
+
     describe('App-header', () => {
         it('App renders div with class App-header', () => {
             const node = shallow(<Header />).render()['0'];
@@ -46,4 +52,19 @@ describe('App', () => {
             expect(node);
         });
     });
+
+    describe('Logged In', () => {
+        it('Not Login component', () => {
+            const wrapper = render(<App isLoggedIn={true}/>);
+            const login = wrapper.find('.App-body');
+            expect(login.length).toBe(0);
+        });
+
+        it('Has CourseList', () => {
+            const wrapper = render(<App isLoggedIn={true}/>);
+            const courselist = wrapper.find('#CourseList');
+            expect(courselist.length).toBe(1);
+        });
+    });
+
 });
