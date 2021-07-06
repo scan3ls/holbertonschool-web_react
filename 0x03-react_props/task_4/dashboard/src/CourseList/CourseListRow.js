@@ -10,20 +10,22 @@ function CourseListRow(props) {
     if (isHeader) {
         if(textSecondCell === null) {
             return (
-                <th colSpan="2">
-                    {textFirstCell}
-                </th>
+                <tr>
+                    <th colSpan="2">
+                        {textFirstCell}
+                    </th>
+                </tr>
             );
         } else {
             return (
-                <React.Fragment>
-                    <th>
+                <tr>
+                    <th style={{textAlign: "start"}}>
                         {textFirstCell}
                     </th>
-                    <th>
+                    <th style={{textAlign: "start"}}>
                         {textSecondCell}
                     </th>
-                </React.Fragment>
+                </tr>
             );
         }
     } else {

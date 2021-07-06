@@ -7,8 +7,8 @@ function CourseList() {
     return (
         <table id="CourseList">
             <thead>
-                <CourseListRow textFirstCell="Available courses" isHead={true}/>
-                <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHead={true}/>
+                <CourseListRow textFirstCell="Available courses" isHeader={true}/>
+                <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true}/>
             </thead>
             <tbody>
                 <CourseListRow textFirstCell="ES6" textSecondCell="60"  isHeader={false}/>

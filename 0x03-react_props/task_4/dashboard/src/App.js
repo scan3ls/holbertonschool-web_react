@@ -9,7 +9,9 @@ import CourseList from './CourseList/CourseList';
 function Body(props) {
   if (props.isLoggedIn) {
     return (
-      <CourseList />
+      <div className="CourseBody">
+        <CourseList />
+      </div>
     );
   } else {
     return (

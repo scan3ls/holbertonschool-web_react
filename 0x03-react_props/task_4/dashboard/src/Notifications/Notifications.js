@@ -28,9 +28,6 @@ const list_style = {
     listStyle: 'disc'
 };
 
-const notification_style = {
-    display: 'flex'
-}
 export default function Notifications(props) {
     const hidden = !props.displayDrawer;
 

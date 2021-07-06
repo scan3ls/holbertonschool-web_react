@@ -1,19 +1,19 @@
 import React from 'react';
 import assert from 'assert';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 import CourseListRow from './CourseListRow';
 
 describe('CourseListRow', () => {
     describe('isHeader', () => {
         describe('True', () => {
             it('textSecondCell not set', () => {
-                const wrapper = shallow(
+                const wrapper = render(
                     <CourseListRow 
                         isHeader={true}
                         textFirstCell="name"
                     />);
     
-                const th = wrapper.render()['0'];
+                const th = wrapper.children()[0];
                 assert.equal(th.name, 'th');
                 assert.equal(th.attribs.colspan, '2');
             });
@@ -26,8 +26,7 @@ describe('CourseListRow', () => {
                         textSecondCell="value"
                     />);
 
-                const children = wrapper.render().toArray();
-
+                const children = wrapper.render().children().toArray();
                 const cells = [];
                 children.forEach((child) => {
                     const text = child.firstChild.data;
