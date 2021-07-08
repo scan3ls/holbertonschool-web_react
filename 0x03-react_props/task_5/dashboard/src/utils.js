@@ -11,3 +11,17 @@ export function getFooterCopy(isIndex) {
 export function getLatestNotification() {
     return {__html: '<strong>Urgent requirement</strong> - complete by EOD'};
 }
+
+// dummy course data
+export const listCourses = [
+    {id: 1, name: "ES6", credit: 60},
+    {id: 2, name: "Webpack", credit: 20},
+    {id: 3, name: "React", credit: 40}
+];
+
+// dummy Notification data
+export const listNotifications = [
+    {id: 1, type:"default", value: "New course available"},
+    {id: 2, type: "urgent", value: "New course available"},
+    {id: 3, type: "urgent", value: "New course available", html: getLatestNotification()}
+];

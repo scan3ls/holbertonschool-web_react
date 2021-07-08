@@ -1,8 +1,9 @@
 import React from 'react';
 import './Notifications.css';
 import closeIcon from './close-icon.png';
-import { getLatestNotification} from '../utils';
 import NotificationItem from './NotificationItem'; 
+import PropTypes from 'prop-types';
+import NotificationItemShape from './NotificationItemShape';
 
 const button_click = () => {
     console.log('Close button has been clicked');
@@ -28,8 +29,33 @@ const list_style = {
     listStyle: 'disc'
 };
 
+function NotificationRows(props) {
+    const { listNotifications } = props;
+
+    if (listNotifications.length === 0) return(
+        <NotificationItem
+            type="defualt"
+            value="No new notification for now"
+        />
+    );
+
+    return(
+        listNotifications.map(
+            (notification) =>
+                <NotificationItem
+                    key={notification.id}
+                    type={notification.type}
+                    html={notification.html}
+                    value={notification.value}
+                />
+        )
+    );
+}
+
+
 export default function Notifications(props) {
     const hidden = !props.displayDrawer;
+    const { listNotifications } = props;
 
     return (
         <div className="main_notice">
@@ -42,11 +68,17 @@ export default function Notifications(props) {
                 </button>
                 <p>Here is the list of notifications</p>
                 <ul style={list_style}>
-                    <NotificationItem type="default" value="New course available"/>
-                    <NotificationItem type="urgent" value="New course available"/>
-                    <NotificationItem type="urgent" value="New course available" html={getLatestNotification()}/>
+                    <NotificationRows listNotifications={listNotifications} />
                 </ul>
             </div>
         </div>
     );
+}
+
+Notifications.propTypes = {
+    listNotifications: PropTypes.arrayOf(NotificationItemShape)
+};
+
+Notifications.defaultProps = {
+    listNotifications: []
 }

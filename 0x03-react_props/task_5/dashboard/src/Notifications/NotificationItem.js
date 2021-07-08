@@ -9,6 +9,7 @@ function NotificationItem(props) {
         if (typeof html.__html !== "string") throw new Error('html.__html must be a string');
     }
 
+
     if (value) {
         if (typeof value !== 'string') throw new Error('value must be a string');
     }

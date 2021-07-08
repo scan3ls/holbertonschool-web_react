@@ -3,7 +3,7 @@ import React from 'react';
 function CourseListRow(props) {
     const isHeader = (props.isHeader) ? props.isHeader : false;
     const textFirstCell = (props.textFirstCell) ? props.textFirstCell : null;
-    const textSecondCell = (props.textSecondCell) ? props.textSecondCell : null;
+    const textSecondCell = (props.textSecondCell) ? props.textSecondCell.toString() : null;
 
     if (textFirstCell === null) throw(new Error('textFirstCell is required'));
 
