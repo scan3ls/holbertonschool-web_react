@@ -3,22 +3,41 @@ import './App.css';
 import Header from './Header/Header';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
-import Notifications from './Notifications';
+import Notifications from './Notifications/Notifications';
+import CourseList from './CourseList/CourseList';
+import {
+  listCourses,
+  listNotifications 
+} from './utils';
 
-class App extends React.Component {
+function Body(props) {
 
-  render() {
+  if (props.isLoggedIn) {
     return (
-      <React.Fragment>
-        <Notifications />
-        <div className="App">
-          <Header />
-          <Login />
-          <Footer />
-        </div>
-      </React.Fragment>
+      <div className="CourseBody">
+        <CourseList listCourses={listCourses}/>
+      </div>
+    );
+  } else {
+    return (
+      <Login />
     );
   }
+}
+
+function App(props) {
+  const isLoggedIn = (props.isLoggedIn) ? props.isLoggedIn : false;
+
+  return (
+    <React.Fragment>
+      <Notifications displayDrawer={true} listNotifications={listNotifications}/>
+      <div className="App">
+        <Header />
+        <Body isLoggedIn={isLoggedIn}/>
+        <Footer />
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default App;

@@ -1,6 +1,0 @@
-.App-body {
-    border-top: var(--body-border);
-    border-bottom: var(--body-border);
-    min-height: var(--min-body-height);
-    padding: var(--body-padding);
-}

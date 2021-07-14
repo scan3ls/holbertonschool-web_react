@@ -25,7 +25,7 @@ describe('Testing util functions', () => {
         it('getLatestNotification', () => {
             const result = getLatestNotification();
             const expected = '<strong>Urgent requirement</strong> - complete by EOD';
-            assert.equal(result, expected);
+            assert.equal(result.__html, expected);
         });
     });
 });
