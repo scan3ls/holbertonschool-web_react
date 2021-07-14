@@ -25,19 +25,25 @@ function Body(props) {
   }
 }
 
-function App(props) {
-  const isLoggedIn = (props.isLoggedIn) ? props.isLoggedIn : false;
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <React.Fragment>
-      <Notifications displayDrawer={true} listNotifications={listNotifications}/>
-      <div className="App">
-        <Header />
-        <Body isLoggedIn={isLoggedIn}/>
-        <Footer />
-      </div>
-    </React.Fragment>
-  );
+  render() {
+    const isLoggedIn = (this.props.isLoggedIn) ? this.props.isLoggedIn : false;
+
+    return (
+      <React.Fragment>
+        <Notifications displayDrawer={true} listNotifications={listNotifications}/>
+        <div className="App">
+          <Header />
+          <Body isLoggedIn={isLoggedIn}/>
+          <Footer />
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
