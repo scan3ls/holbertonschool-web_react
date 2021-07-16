@@ -5,6 +5,8 @@ import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Notifications from './Notifications/Notifications';
 import CourseList from './CourseList/CourseList';
+import BodySectionWithMarginBottom from './BodySection/BodySectionWithMarginBottom';
+import BodySection from './BodySection/BodySection';
 import {
   listCourses,
   listNotifications 
@@ -16,12 +18,19 @@ function Body(props) {
   if (props.isLoggedIn) {
     return (
       <div className="CourseBody">
-        <CourseList listCourses={listCourses}/>
+        <BodySectionWithMarginBottom title="Course list">
+          <CourseList listCourses={listCourses}/>
+          <BodySection title="News from the school">
+            <p>some text</p>
+          </BodySection>
+        </BodySectionWithMarginBottom>
       </div>
     );
   } else {
     return (
-      <Login />
+      <BodySectionWithMarginBottom title="Log in to continue">
+        <Login />
+      </BodySectionWithMarginBottom>
     );
   }
 }
