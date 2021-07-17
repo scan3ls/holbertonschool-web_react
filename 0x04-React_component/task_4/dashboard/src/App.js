@@ -7,6 +7,7 @@ import Notifications from './Notifications/Notifications';
 import CourseList from './CourseList/CourseList';
 import BodySectionWithMarginBottom from './BodySection/BodySectionWithMarginBottom';
 import BodySection from './BodySection/BodySection';
+import highOrderComponent from './HOC/WithLogging';
 import {
   listCourses,
   listNotifications 
@@ -27,9 +28,10 @@ function Body(props) {
       </div>
     );
   } else {
+    const WithLoggingLogin = highOrderComponent(Login);
     return (
       <BodySectionWithMarginBottom title="Log in to continue">
-        <Login />
+        <WithLoggingLogin />
       </BodySectionWithMarginBottom>
     );
   }
