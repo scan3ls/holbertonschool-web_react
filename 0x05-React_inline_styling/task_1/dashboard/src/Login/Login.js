@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
         borderBottom: '4px solid rgb(223, 57, 81)',
         minHeight: '20rem',
         padding: '3rem'
+    },
+
+    bruh: {
+        margin: 0
     }
 });
 

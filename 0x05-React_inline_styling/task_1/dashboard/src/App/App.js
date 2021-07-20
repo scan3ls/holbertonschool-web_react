@@ -87,7 +87,11 @@ App.defaultProps = {
 }
 
 const styles = StyleSheet.create({
-  App: { padding: "0rem 0.5rem" }
+  App: { padding: "0rem 0.5rem" },
+
+  body: {},
+
+  footer: {}
 });
 
 export default App;
