@@ -76,7 +76,7 @@ class Notifications extends React.Component {
         const { listNotifications } = this.props;
     
         return (
-            <div className={css(styles.m)}>
+            <div className={css(styles.mainNotice)}>
                 <div>
                     <p className={css(styles.menuItems_P)}>Your notifications</p>
                 </div>
