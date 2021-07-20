@@ -22,7 +22,7 @@ function Body(props) {
         <BodySectionWithMarginBottom title="Course list">
           <CourseList listCourses={listCourses}/>
           <BodySection title="News from the school">
-            <p>some text</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duisaute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa quiofficia deserunt mollit anim id est laborum.</p>
           </BodySection>
         </BodySectionWithMarginBottom>
       </div>
@@ -32,6 +32,9 @@ function Body(props) {
     return (
       <BodySectionWithMarginBottom title="Log in to continue">
         <WithLoggingLogin />
+        <BodySection title="News from the school">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duisaute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa quiofficia deserunt mollit anim id est laborum.</p>
+          </BodySection>
       </BodySectionWithMarginBottom>
     );
   }
@@ -70,7 +73,9 @@ class App extends React.Component {
         <Notifications displayDrawer={true} listNotifications={listNotifications}/>
         <div className={css(styles.App)}>
           <Header />
-          <Body isLoggedIn={isLoggedIn}/>
+          <div className={css(styles.body)}>
+            <Body isLoggedIn={isLoggedIn}/>
+          </div>
           <Footer />
         </div>
       </React.Fragment>
@@ -87,9 +92,14 @@ App.defaultProps = {
 }
 
 const styles = StyleSheet.create({
-  App: { padding: "0rem 0.5rem" },
+  App: { padding: "0rem 1rem" },
 
-  body: {},
+  body: {
+    borderTop: '4px solid rgb(223, 57, 81)',
+    borderBottom: '4px solid rgb(223, 57, 81)',
+    minHeight: '20rem',
+    padding: '3rem'
+  },
 
   footer: {}
 });
