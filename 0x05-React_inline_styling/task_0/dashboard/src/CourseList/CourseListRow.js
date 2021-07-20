@@ -11,14 +11,14 @@ function CourseListRow(props) {
         if(textSecondCell === null) {
             return (
                 <tr>
-                    <th colSpan="2">
+                    <th colSpan="2" style={{backgroundColor: "#deb5b545"}}>
                         {textFirstCell}
                     </th>
                 </tr>
             );
         } else {
             return (
-                <tr>
+                <tr style={{backgroundColor: "#f5f5f5ab"}}>
                     <th style={{textAlign: "start"}}>
                         {textFirstCell}
                     </th>
