@@ -1,8 +1,8 @@
 import App from './App';
-import Header from './Header/Header';
-import Login from './Login/Login';
-import Footer from './Footer/Footer';
-import Notification from './Notifications/Notifications';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import Notification from '../Notifications/Notifications';
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 
