@@ -27,7 +27,7 @@ class NotificationItem extends React.PureComponent {
             type = 'default';
         }
 
-        const priority = (type === 'urgent') ? css(styles.urgent) : css(styles.default);
+        const priority = (type === 'urgent') ? css(styles.urgent, styles.small) : css(styles.default, styles.small);
 
         return (
             (html)
@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
 
     urgent: {
         color: 'rgb(211, 64, 64)'
+    },
+
+    small: {
+        '@media (max-width: 900px)': {
+            padding: '10px 8px',
+            borderBottom: '1px solid black'
+        }
     }
 });
 

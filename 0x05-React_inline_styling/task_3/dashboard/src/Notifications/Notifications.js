@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
         '@media (max-width: 900px)': {
             fontSize: '20px',
             left: 0,
-            bottom: 0
+            bottom: 0,
+            margin: 0
         }
     },
 
