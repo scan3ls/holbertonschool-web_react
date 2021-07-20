@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 function CourseListRow(props) {
     const isHeader = (props.isHeader) ? props.isHeader : false;
@@ -11,18 +12,18 @@ function CourseListRow(props) {
         if(textSecondCell === null) {
             return (
                 <tr>
-                    <th colSpan="2" style={{backgroundColor: "#deb5b545"}}>
+                    <th colSpan="2" className={css(styles.header)}>
                         {textFirstCell}
                     </th>
                 </tr>
             );
         } else {
             return (
-                <tr style={{backgroundColor: "#f5f5f5ab"}}>
-                    <th style={{textAlign: "start"}}>
+                <tr className={css(styles.default)}>
+                    <th className={css(styles.algin)}>
                         {textFirstCell}
                     </th>
-                    <th style={{textAlign: "start"}}>
+                    <th className={css(styles.algin)}>
                         {textSecondCell}
                     </th>
                 </tr>
@@ -37,5 +38,19 @@ function CourseListRow(props) {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    default: {
+        backgroundColor: '#f5f5f5ab'
+    },
+
+    header: {
+        backgroundColor: '#deb5b545'
+    },
+
+    algin: {
+        textAlign: 'start'
+    }
+});
 
 export default CourseListRow;
