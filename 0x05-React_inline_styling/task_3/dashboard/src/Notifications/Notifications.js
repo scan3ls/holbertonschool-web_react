@@ -5,10 +5,6 @@ import PropTypes from 'prop-types';
 import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 
-const button_click = () => {
-    console.log('Close button has been clicked');
-};
-
 const button_style = {
     position: 'relative',
     left: '97%',
@@ -23,10 +19,6 @@ const button_style = {
 const img_style = {
     width: '1rem',
     height: '1rem'
-};
-
-const list_style = {
-    listStyle: 'disc'
 };
 
 function NotificationRows(props) {
@@ -58,12 +50,15 @@ class Notifications extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            hidden: !this.props.displayDrawer
+        };
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         const currentLength = this.props.listNotifications.length;
         const nextLength = nextProps.listNotifications.length;
-        return (nextLength > currentLength) ? true : false;
+        return (nextLength >= currentLength) ? true : false;
     }
 
     markAsRead(id) {
@@ -72,20 +67,30 @@ class Notifications extends React.Component {
     }
 
     render() {
-        const hidden = !this.props.displayDrawer;
+        const hidden = this.state.hidden;
         const { listNotifications } = this.props;
-    
+
+        const toggle = () => {
+            this.setState({hidden: !this.state.hidden});
+        };
+        const button_click = () => {
+            console.log('Close button has been clicked');
+            toggle();
+        };
+
+        const notificationStyles = (this.state.hidden) ? css(styles.mainNotice): css(styles.mainNotice, styles.onlyPopup);
+
         return (
-            <div className={css(styles.mainNotice)}>
+            <div className={notificationStyles}>
                 <div>
-                    <p className={css(styles.menuItems_P)}>Your notifications</p>
+                    <p className={css(styles.menuItems_P)} onClick={toggle}>Your notifications</p>
                 </div>
                 <div hidden={hidden} className={css(styles.notifications)}>
                     <button style={button_style} aria-label="Close" onClick={button_click}>
                         <img style={img_style} src={closeIcon} alt="close-img"></img>
                     </button>
                     <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
-                    <ul style={list_style}>
+                    <ul className={css(styles.list)}>
                         <NotificationRows listNotifications={listNotifications} markAsRead={this.markAsRead}/>
                     </ul>
                 </div>
@@ -110,18 +115,28 @@ const styles = StyleSheet.create({
         minWidth: '250px',
         right: 0,
         top: 0,
-        margin: '1rem'
+        margin: '1rem',
+        '@media (max-width: 900px)': {
+            fontSize: '20px',
+            left: 0,
+            bottom: 0
+        }
     },
 
     menuItems_P: {
         padding: 0,
         margin: 0,
-        textAlign: 'end'
+        textAlign: 'end',
+        cursor: 'pointer'
     },
 
     notifications: {
         border: `1px dashed rgb(211, 64, 64)`,
-        padding: '0 1rem'
+        padding: '0 1rem',
+        '@media (max-width: 900px)': {
+            border: 'none',
+            padding: 0
+        }
     },
 
     notifications_P: {
@@ -129,6 +144,16 @@ const styles = StyleSheet.create({
         padding: 0
     },
 
+    onlyPopup: {
+        backgroundColor: 'white'
+    },
+
+    list: {
+        '@media (max-width: 900px)': {
+            listStyle: 'none',
+            padding: 0
+        }
+    }
 });
 
 export default Notifications;
