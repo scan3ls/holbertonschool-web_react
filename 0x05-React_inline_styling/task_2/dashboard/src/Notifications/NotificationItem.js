@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 class NotificationItem extends React.PureComponent {
     constructor(props) {
@@ -26,14 +27,24 @@ class NotificationItem extends React.PureComponent {
             type = 'default';
         }
 
-        const color = (type === 'urgent') ? 'rgb(211, 64, 64)': 'rgb(5, 29, 163)';
+        const priority = (type === 'urgent') ? css(styles.urgent) : css(styles.default);
 
         return (
             (html)
-            ? <li style={{color: color}} data-priority={type} onClick={() => {markAsRead(id)}} dangerouslySetInnerHTML={html}></li>
-            : <li style={{color: color}} data-priority={type} onClick={() => {markAsRead(id)}}>{value}</li>
+            ? <li className={priority} data-priority={type} onClick={() => {markAsRead(id)}} dangerouslySetInnerHTML={html}></li>
+            : <li className={priority} data-priority={type} onClick={() => {markAsRead(id)}}>{value}</li>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    default: {
+        color: 'rgb(5, 29, 163)'
+    },
+
+    urgent: {
+        color: 'rgb(211, 64, 64)'
+    }
+});
 
 export default NotificationItem;
