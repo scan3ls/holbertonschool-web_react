@@ -50,9 +50,6 @@ class Notifications extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            hidden: !this.props.displayDrawer
-        };
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -67,18 +64,22 @@ class Notifications extends React.Component {
     }
 
     render() {
-        const hidden = this.state.hidden;
+        const hidden = !this.props.displayDrawer;
         const { listNotifications } = this.props;
 
         const toggle = () => {
-            this.setState({hidden: !this.state.hidden});
+            if (this.props.displayDrawer) {
+                this.props.handleHideDrawer();
+            } else {
+                this.props.handleDisplayDrawer();
+            }
         };
         const button_click = () => {
             console.log('Close button has been clicked');
             toggle();
         };
 
-        const notificationStyles = (this.state.hidden) ? css(styles.mainNotice): css(styles.mainNotice, styles.onlyPopup);
+        const notificationStyles = (hidden) ? css(styles.mainNotice): css(styles.mainNotice, styles.onlyPopup);
 
         return (
             <div className={notificationStyles}>
@@ -100,11 +101,15 @@ class Notifications extends React.Component {
 }
 
 Notifications.propTypes = {
-    listNotifications: PropTypes.arrayOf(NotificationItemShape)
+    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func
 };
 
 Notifications.defaultProps = {
-    listNotifications: []
+    listNotifications: [],
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {}
 }
 
 const translateKeyframes = {

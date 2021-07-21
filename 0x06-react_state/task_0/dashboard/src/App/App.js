@@ -44,7 +44,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      displayDrawer: true
+    }
+
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
+  }
+
+  handleDisplayDrawer() {
+    this.setState({displayDrawer: true});
+  }
+
+  handleHideDrawer() {
+    this.setState({displayDrawer: false});
   }
 
   handleKeypress(event) {
@@ -70,7 +84,12 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Notifications displayDrawer={true} listNotifications={listNotifications}/>
+        <Notifications
+          displayDrawer={this.state.displayDrawer}
+          listNotifications={listNotifications}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
         <div className={css(styles.App)}>
           <Header />
           <div className={css(styles.body)}>
