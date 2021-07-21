@@ -107,6 +107,23 @@ Notifications.defaultProps = {
     listNotifications: []
 }
 
+const translateKeyframes = {
+    '0%': { transform: 'translateY(0px)' },
+    '25%': { transform: 'translateY(-5px)' },
+    '75%': { transform: 'translateY(5px)' },
+    '100%': { transform: 'translateY(0px)' },
+};
+
+const opacityKeyframes = {
+    'from': {
+        opacity: 0.5,
+    },
+
+    'to': {
+        opacity: 1,
+    }
+};
+
 const styles = StyleSheet.create({
     mainNotice: {
         display: 'flex',
@@ -128,7 +145,13 @@ const styles = StyleSheet.create({
         padding: 0,
         margin: 0,
         textAlign: 'end',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        ':hover': {
+            animationName: [translateKeyframes, opacityKeyframes],
+            animationIterationCount: 3,
+            animationDuration: '.5s',
+            transitionDuration: '1s'
+        },
     },
 
     notifications: {
@@ -142,7 +165,7 @@ const styles = StyleSheet.create({
 
     notifications_P: {
         margin: 0,
-        padding: 0
+        padding: 0,
     },
 
     onlyPopup: {
@@ -154,7 +177,11 @@ const styles = StyleSheet.create({
             listStyle: 'none',
             padding: 0
         }
-    }
+    },
+
+    bounce: {
+
+    },
 });
 
 export default Notifications;
