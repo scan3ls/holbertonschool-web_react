@@ -79,23 +79,25 @@ class Notifications extends React.Component {
             toggle();
         };
 
-        const notificationStyles = (hidden) ? css(styles.mainNotice): css(styles.mainNotice, styles.onlyPopup);
+        const notificationStyles = (hidden) ? css(styles.mainNotice, styles.hidden): css(styles.mainNotice);
 
         return (
-            <div className={notificationStyles}>
-                <div>
+            <React.Fragment>
+                <div style={{margin: '1rem'}}>
                     <p className={css(styles.menuItems_P)} onClick={toggle}>Your notifications</p>
                 </div>
-                <div hidden={hidden} className={css(styles.notifications)}>
-                    <button style={button_style} aria-label="Close" onClick={button_click}>
-                        <img style={img_style} src={closeIcon} alt="close-img"></img>
-                    </button>
-                    <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
-                    <ul className={css(styles.list)}>
-                        <NotificationRows listNotifications={listNotifications} markAsRead={this.markAsRead}/>
-                    </ul>
+                <div className={notificationStyles}>
+                    <div className={styles.notifications}>
+                        <button style={button_style} aria-label="Close" onClick={button_click}>
+                            <img style={img_style} src={closeIcon} alt="close-img"></img>
+                        </button>
+                        <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
+                        <ul className={css(styles.list)}>
+                            <NotificationRows listNotifications={listNotifications} markAsRead={this.markAsRead}/>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         margin: '1rem',
+        backgroundColor: 'white',
         '@media (max-width: 900px)': {
             fontSize: '20px',
             left: 0,
@@ -173,8 +176,8 @@ const styles = StyleSheet.create({
         padding: 0,
     },
 
-    onlyPopup: {
-        backgroundColor: 'white'
+    hidden: {
+        display: 'none'
     },
 
     list: {
