@@ -9,7 +9,5 @@ export function concatElements(page1, page2) {
 export function mergeElements(page1, page2) {
   const map1 = Map(page1);
   const map2 = Map(page2);
-  return map2.mergeWith((oldValue, newValue) => {
-    return oldValue;
-  }, map1);
+  return map2.mergeWith((oldValue) => oldValue, map1);
 }
