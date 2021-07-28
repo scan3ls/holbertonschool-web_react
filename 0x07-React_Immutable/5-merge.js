@@ -10,6 +10,6 @@ export function mergeElements(page1, page2) {
   const map1 = Map(page1);
   const map2 = Map(page2);
   return map2.mergeWith((oldValue, newValue) => {
-      return oldValue;
+    return oldValue;
   }, map1);
 }
