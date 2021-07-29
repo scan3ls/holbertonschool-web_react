@@ -45,7 +45,8 @@ class App extends React.Component {
     this.state = {
       displayDrawer: true,
       user: {email: '', password: '', isLoggedIn: false},
-      logOut: () => {}
+      logOut: () => {},
+      listNotifications: listNotifications
     }
 
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -53,6 +54,13 @@ class App extends React.Component {
     this.handleKeypress = this.handleKeypress.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+  }
+
+  markNotificationAsRead(id) {
+    const newList = this.state.listNotifications;
+    delete newList[id];
+    this.setState({listNotifications: newList});
   }
 
   logIn(email, password) {
@@ -93,7 +101,7 @@ class App extends React.Component {
   }
 
   render() {
-    const user = this.state.user;
+    const {user, listNotifications} = this.state;
     const {email, password, isLoggedIn} = user;
 
     return (
@@ -103,6 +111,7 @@ class App extends React.Component {
           listNotifications={listNotifications}
           handleDisplayDrawer={this.handleDisplayDrawer}
           handleHideDrawer={this.handleHideDrawer}
+          markNotificationAsRead={this.markNotificationAsRead}
         />
         <div className={css(styles.App)}>
           <Header />

@@ -52,20 +52,9 @@ class Notifications extends React.Component {
         super(props);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        const currentLength = this.props.listNotifications.length;
-        const nextLength = nextProps.listNotifications.length;
-        return (nextLength >= currentLength) ? true : false;
-    }
-
-    markAsRead(id) {
-
-        console.log(`Notification ${id} has been marked as read`);
-    }
-
     render() {
         const hidden = !this.props.displayDrawer;
-        const { listNotifications } = this.props;
+        const { listNotifications, markNotificationAsRead } = this.props;
 
         const toggle = () => {
             if (this.props.displayDrawer) {
@@ -93,7 +82,9 @@ class Notifications extends React.Component {
                         </button>
                         <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
                         <ul className={css(styles.list)}>
-                            <NotificationRows listNotifications={listNotifications} markAsRead={this.markAsRead}/>
+                            <NotificationRows
+                                listNotifications={listNotifications} 
+                                markAsRead={markNotificationAsRead}/>
                         </ul>
                     </div>
                 </div>
@@ -105,13 +96,15 @@ class Notifications extends React.Component {
 Notifications.propTypes = {
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
     handleDisplayDrawer: PropTypes.func,
-    handleHideDrawer: PropTypes.func
+    handleHideDrawer: PropTypes.func,
+    markNotificationAsRead: PropTypes.func
 };
 
 Notifications.defaultProps = {
     listNotifications: [],
     handleDisplayDrawer: () => {},
-    handleHideDrawer: () => {}
+    handleHideDrawer: () => {},
+    markNotificationAsRead: () => {}
 }
 
 const translateKeyframes = {
