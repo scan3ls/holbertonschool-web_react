@@ -1,12 +1,10 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { timers } from 'jquery';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: false,
             email: '',
             password: '',
             enableSubmit: false,
@@ -39,7 +37,8 @@ class Login extends React.Component {
 
     handleLoginSubmit(event) {
         event.preventDefault();
-        this.setState({isLoggedIn: true});
+        const {email, password} = this.state;
+        this.props.logIn(email, password);
     }
 
     render() {
