@@ -1,4 +1,5 @@
 import * as types from './uiActionTypes';
+import { bound } from './totallyLegitFunctions';
 
 export function login(email, password) {
     const type = types.LOGIN;
@@ -19,3 +20,10 @@ export function hideNotificationDrawer() {
     const type = types.HIDE_NOTIFICATION_DRAWER;
     return {type};
 }
+
+const boundLogin = bound(login);
+const boundLogout = bound(logout);
+const boundDisplay = bound(displayNotificationDrawer);
+const boundHide = bound(hideNotificationDrawer);
+
+export {boundLogin, boundLogout, boundDisplay, boundHide};
