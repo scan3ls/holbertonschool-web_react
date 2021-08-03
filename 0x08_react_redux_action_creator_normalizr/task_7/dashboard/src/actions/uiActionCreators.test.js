@@ -32,4 +32,12 @@ describe('uiActionCreators', () => {
 
         assert.equal(received, expected);
     });
+
+    it('Login Request', () => {
+        const store = uiCreators.store;
+
+        uiCreators.loginRequest('email', 'password');
+        assert.equal(1, 2);
+
+    });
 });
