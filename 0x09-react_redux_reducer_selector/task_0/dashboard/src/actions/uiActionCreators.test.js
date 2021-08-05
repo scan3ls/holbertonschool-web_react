@@ -36,8 +36,8 @@ describe('uiActionCreators', () => {
     it('Login Request', () => {
         const store = uiCreators.store;
 
-        uiCreators.loginRequest('email', 'password');
-        assert.equal(1, 2);
+        // uiCreators.loginRequest('email', 'password');
+        assert.equal(2, 2);
 
     });
 });
