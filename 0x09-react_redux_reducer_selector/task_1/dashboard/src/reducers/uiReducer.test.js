@@ -5,7 +5,7 @@ import {initialState, uiReducer} from './uiReducer';
 
 describe('basic reducer', () => {
     it('No action', () => {
-        const state = uiReducer(undefined, undefined);
+        const state = uiReducer(undefined, undefined).toJSON();
         const recieved = JSON.stringify(state);
         const expected = JSON.stringify(initialState);
 
@@ -13,7 +13,7 @@ describe('basic reducer', () => {
     });
 
     it('Invalid Action', () => {
-        const state = uiReducer(undefined, invalidAction.selectCourse(1));
+        const state = uiReducer(undefined, invalidAction.selectCourse(1)).toJSON();
         const recieved = JSON.stringify(state);
         const expected = JSON.stringify(initialState);
 
@@ -21,7 +21,7 @@ describe('basic reducer', () => {
     });
 
     it('Valid action', () => {
-        const state = uiReducer(undefined, validActions.displayNotificationDrawer());
+        const state = uiReducer(undefined, validActions.displayNotificationDrawer()).toJSON();
         const recieved = JSON.stringify(state);
         const expected = JSON.stringify({...initialState, isNotificationDrawerVisible: true});
 

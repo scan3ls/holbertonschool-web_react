@@ -1,4 +1,5 @@
 import * as types from '../actions/uiActionTypes';
+import { Map } from 'immutable';
 
 const initialState = {
     isNotificationDrawerVisible: false,
@@ -7,26 +8,26 @@ const initialState = {
 };
 
 function uiReducer(state = initialState, action) {
-    if (action === undefined) return {...state};
+    if (action === undefined) return Map({...state});
 
     switch (action.type) {
         case types.DISPLAY_NOTIFICATION_DRAWER:
-            return {...state,isNotificationDrawerVisible: true};
+            return Map({...state,isNotificationDrawerVisible: true});
 
         case types.HIDE_NOTIFICATION_DRAWER:
-            return {...state, isNotificationDrawerVisible: false};
+            return Map({...state, isNotificationDrawerVisible: false});
 
         case types.LOGIN_SUCCESS:
-            return {...state, isUserLogginIn: true};
+            return Map({...state, isUserLogginIn: true});
 
         case types.LOGIN_FAILURE:
-            return {...state, isUserLogginIn: false};
+            return Map({...state, isUserLogginIn: false});
 
         case types.LOGOUT:
-            return {...state, isUserLogginIn: false};
+            return Map({...state, isUserLogginIn: false});
 
         default:
-            return {...state};
+            return Map({...state});
     }
 }
 
