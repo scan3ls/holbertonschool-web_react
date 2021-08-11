@@ -1,33 +1,33 @@
 import * as types from '../actions/uiActionTypes';
 import { Map } from 'immutable';
 
-const initialState = {
+const initialState = Map({
     isNotificationDrawerVisible: false,
-    isUserLogginIn: false,
+    isUserLoggedIn: false,
     user: {}
-};
+});
 
 function uiReducer(state = initialState, action) {
-    if (action === undefined) return Map({...state});
+    if (action === undefined) return state;
 
     switch (action.type) {
         case types.DISPLAY_NOTIFICATION_DRAWER:
-            return Map({...state,isNotificationDrawerVisible: true});
+            return state.set('isNotificationDrawerVisible', true);
 
         case types.HIDE_NOTIFICATION_DRAWER:
-            return Map({...state, isNotificationDrawerVisible: false});
+            return state.set('isNotificationDrawerVisible', false);
 
         case types.LOGIN_SUCCESS:
-            return Map({...state, isUserLogginIn: true});
+            return state.set('isUserLoggedIn', true);
 
         case types.LOGIN_FAILURE:
-            return Map({...state, isUserLogginIn: false});
+            return state.set('isUserLoggedIn', false);
 
         case types.LOGOUT:
-            return Map({...state, isUserLogginIn: false});
+            return state.set('isUserLoggedIn', false);
 
         default:
-            return Map({...state});
+            return state;
     }
 }
 
