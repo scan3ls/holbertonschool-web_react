@@ -149,6 +149,4 @@ export function mapStateToProps(state) {
   return {isLoggedIn};
 }
 
-connect(mapStateToProps)(App);
-
-export default App;
+export default connect(mapStateToProps)(App);
