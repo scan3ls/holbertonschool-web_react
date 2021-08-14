@@ -13,6 +13,12 @@ import {
 import { StyleSheet, css } from 'aphrodite';
 import AppContext from './AppContext';
 
+
+export function mapStateToProps(state) {
+  const isLoggedIn = state.get('isUserLoggedIn');
+  return {isLoggedIn};
+}
+
 function Body(props) {
 
   if (props.isLoggedIn) {
