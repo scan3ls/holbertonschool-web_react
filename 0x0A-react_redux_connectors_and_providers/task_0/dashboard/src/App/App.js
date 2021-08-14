@@ -12,6 +12,7 @@ import {
 } from '../utils';
 import { StyleSheet, css } from 'aphrodite';
 import AppContext from './AppContext';
+import { connect } from 'react-redux';
 
 function Body(props) {
 
@@ -141,5 +142,13 @@ const styles = StyleSheet.create({
 
   footer: {}
 });
+
+export function mapStateToProps(state) {
+  const isLoggedIn = state.get('isUserLoggedIn');
+  console.log(isLoggedIn);
+  return {isLoggedIn};
+}
+
+connect(mapStateToProps)(App);
 
 export default App;
