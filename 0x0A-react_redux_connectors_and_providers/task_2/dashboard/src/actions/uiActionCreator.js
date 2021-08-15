@@ -1,6 +1,5 @@
 import * as types from './uiActionTypes';
 import { bound, ping } from './totallyLegitFunctions';
-import {uiStore as store} from '../index';
 
 export function login(email, password) {
     const type = types.LOGIN;
@@ -33,10 +32,10 @@ export function loginFailure() {
 }
 
 export function loginRequest(email, password) {
-    store.dispatch(login(email, password));
     const promise = ping('https://www.totalLegitUrl');
-
+    
     return (dispatch) => {
+        dispatch(login(email, password));
         return promise
         .then(res => res.json())
         .then(data => {
