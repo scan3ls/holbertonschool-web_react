@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 import { uiReducer } from './reducers/uiReducer';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 const uiStore = configureStore({
   reducer: uiReducer
-})
+}, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={uiStore}>
@@ -17,6 +18,8 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+export {uiStore};
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
