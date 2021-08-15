@@ -13,7 +13,7 @@ import {
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import * as uiActions from "../actions/uiActionCreator";
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 
 function Body(props) {
 
