@@ -11,9 +11,9 @@ import {
   listNotifications 
 } from '../utils';
 import { StyleSheet, css } from 'aphrodite';
-import AppContext from './AppContext';
 import { connect } from 'react-redux';
 import * as uiActions from "../actions/uiActionCreator";
+import PropTypes, { bool } from 'prop-types';
 
 function Body(props) {
 
@@ -45,14 +45,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      user: {email: '', password: '', isLoggedIn: false},
-      logOut: () => {},
       listNotifications: listNotifications
     }
 
     this.handleKeypress = this.handleKeypress.bind(this);
-    this.logIn = this.logIn.bind(this);
-    this.logOut = this.logOut.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
@@ -60,17 +56,6 @@ class App extends React.Component {
     const newList = this.state.listNotifications;
     delete newList[id];
     this.setState({listNotifications: newList});
-  }
-
-  logIn(email, password) {
-    this.setState({
-      user: {email, password, isLoggedIn: true},
-      logOut: this.logOut
-    });
-  }
-
-  logOut() {
-    this.setState({user: {email: '', password: '', isLoggedIn: false}});
   }
 
   handleKeypress(event) {
@@ -92,12 +77,14 @@ class App extends React.Component {
   }
 
   render() {
-    const {user, listNotifications} = this.state;
-    const {displayDrawer, hideNotificationDrawer, displayNotificationDrawer} = this.props;
-    const {email, password, isLoggedIn} = user;
+    const {listNotifications} = this.state;
+    const {
+      displayDrawer, hideNotificationDrawer, displayNotificationDrawer,
+      login, logout, isLoggedIn
+    } = this.props;
 
     return (
-      <AppContext.Provider value={{user: this.state.user, logOut: this.state.logOut}}>
+      <React.Fragment>
         <Notifications
           displayDrawer={displayDrawer}
           listNotifications={listNotifications}
@@ -110,13 +97,13 @@ class App extends React.Component {
           <div className={css(styles.body)}>
             <Body
               isLoggedIn={isLoggedIn}
-              logOut={this.state.logOut}
-              logIn={this.logIn}
+              logOut={logout}
+              logIn={login}
             />
           </div>
           <Footer />
         </div>
-      </AppContext.Provider>
+      </React.Fragment>
     );
   }
 }
@@ -134,10 +121,37 @@ const styles = StyleSheet.create({
   footer: {}
 });
 
-export function mapStateToProps(state) {
+App.propTypes = {
+  displayDrawer: PropTypes.bool,
+  hideNotificationDrawer: PropTypes.func,
+  displayNotificationDrawer: PropTypes.func,
+  login: PropTypes.func,
+  logout: PropTypes.func,
+  isLoggedIn: PropTypes.bool
+}
+
+App.defaultProps = {
+  displayDrawer: false,
+  hideNotificationDrawer: () => {},
+  displayNotificationDrawer: () => {},
+  login: () => {},
+  logout: () => {},
+  isLoggedIn: false
+}
+
+function mapStateToProps(state) {
   const isLoggedIn = state.get('isUserLoggedIn');
   const displayDrawer = state.get('isNotificationDrawerVisible');
   return {isLoggedIn, displayDrawer};
 }
 
-export default connect(mapStateToProps, uiActions)(App);
+const actions = {
+  displayNotificationDrawer: uiActions.displayNotificationDrawer,
+  hideNotificationDrawer: uiActions.hideNotificationDrawer,
+  login: uiActions.loginRequest,
+  logout: uiActions.logout
+};
+
+export {mapStateToProps, actions};
+
+export default connect(mapStateToProps, actions)(App);

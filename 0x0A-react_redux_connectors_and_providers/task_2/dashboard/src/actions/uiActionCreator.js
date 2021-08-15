@@ -1,8 +1,6 @@
 import * as types from './uiActionTypes';
-import { createStore } from 'redux';
 import { bound, ping } from './totallyLegitFunctions';
-
-export const store = createStore(() => {});
+import {uiStore as store} from '../index';
 
 export function login(email, password) {
     const type = types.LOGIN;
@@ -38,21 +36,16 @@ export function loginRequest(email, password) {
     store.dispatch(login(email, password));
     const promise = ping('https://www.totalLegitUrl');
 
-    promise
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        store.dispatch(loginSuccess());
-    })
-    .catch(err => {
-        console.log(err);
-        store.dispatch(loginFailure());
-    });
+    return (dispatch) => {
+        return promise
+        .then(res => res.json())
+        .then(data => {
+            console.log(`Data: ${JSON.stringify(data, null, 2)}`);
+            dispatch(loginSuccess());
+        })
+        .catch(err => {
+            console.log(`Error: ${err}`);
+            dispatch(loginFailure());
+        });
+    };
 }
-
-const boundLogin = bound(login);
-const boundLogout = bound(logout);
-const boundDisplay = bound(displayNotificationDrawer);
-const boundHide = bound(hideNotificationDrawer);
-
-export {boundLogin, boundLogout, boundDisplay, boundHide};
