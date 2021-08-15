@@ -56,5 +56,15 @@ describe('basic reducer', () => {
             assert.equal(state.isUserLoggedIn, false);
         });
 
+        it('Login', () => {
+            const {email, password} = {email: 'email@gmail.com', password: 'password'};
+            const state = uiReducer(undefined, validActions.login(email, password));
+            const {isNotificationDrawerVisible, isUserLoggedIn, user} = state.toJSON();
+
+            assert.equal(isNotificationDrawerVisible, false);
+            assert.equal(isUserLoggedIn, true);
+            assert.equal(user.email, email);
+            assert.equal(user.password, password);
+        });
     });
 });
