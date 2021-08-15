@@ -1,21 +1,26 @@
 import logo from '../Holberton_logo.jpg';
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import AppContext from '../App/AppContext';
+import {connect} from 'react-redux';
+import * as uiActions from '../actions/uiActionCreator';
+import PropTypes from 'prop-types';
 
 function LogOut(props) {
+  const {email, logOut} = props;
   return (
     <div>
-      <p> Welcome <b>{props.email}</b> <button onClick={props.logOut}>(logout)</button></p>
+      <p> Welcome <b>{email}</b> <button onClick={logOut}>(logout)</button></p>
     </div>
   );
 }
 
 class Header extends React.Component {
-  static contextType = AppContext;
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    const {user, logOut} = this.context;
-    const {email, password, isLoggedIn} = user;
+    const {user, isLoggedIn, logout} = this.props;
 
     return (
       <React.Fragment>
@@ -26,7 +31,7 @@ class Header extends React.Component {
         <div>
           {
             (isLoggedIn) 
-            ? <LogOut email={email} logOut={logOut}/>
+            ? <LogOut email={user.email} logOut={logout}/>
             : ''
           }
         </div>
@@ -49,4 +54,26 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Header;
+Header.propTypes = {
+  user: PropTypes.object,
+  isLoggedIn: PropTypes.bool,
+  logout: PropTypes.func
+}
+
+Header.defaultProps = {
+  user: {email: '', password: ''},
+  isLoggedIn: false,
+  logout: () => {}
+}
+
+export function mapStateToProps(state) {
+  const isLoggedIn = state.get('isUserLoggedIn');
+  const user = state.get('user');
+  return {user, isLoggedIn};
+}
+
+const actions = {
+  logout: uiActions.logout
+};
+
+export default connect(mapStateToProps, actions)(Header);

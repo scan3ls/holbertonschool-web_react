@@ -24,7 +24,12 @@ function uiReducer(state = initialState, action) {
             return state.set('isUserLoggedIn', false);
 
         case types.LOGOUT:
-            return state.set('isUserLoggedIn', false);
+            return state.set('isUserLoggedIn', false).set('user', null);
+
+        case types.LOGIN:
+            const user = action.user;
+            user.isLoggedIn = true;
+            return state.set('user', user).set('isUserLoggedIn', true);
 
         default:
             return state;

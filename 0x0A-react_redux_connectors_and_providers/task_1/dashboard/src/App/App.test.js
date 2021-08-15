@@ -1,4 +1,4 @@
-import {mapStateToProps, mapDispatchToProps} from './App';
+import {mapStateToProps} from './App';
 import { fromJS } from 'immutable';
 import {equal as assert} from 'assert';
 
