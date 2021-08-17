@@ -8,9 +8,11 @@ import { uiReducer } from './reducers/uiReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-const uiStore = configureStore({
-  reducer: uiReducer
-}, applyMiddleware(thunk));
+const uiStore = configureStore(
+  { reducer: uiReducer }, 
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+);
 
 ReactDOM.render(
   <Provider store={uiStore}>
