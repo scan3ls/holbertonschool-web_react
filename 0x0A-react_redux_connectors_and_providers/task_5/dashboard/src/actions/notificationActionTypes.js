@@ -6,3 +6,6 @@ export const NotificationTypeFilters = {
     DEFAULT: 'DEFAULT',
     URGENT: 'URGENT'
 };
+
+export const SET_LOADING_STATE = "SET_LOADING_STATE";
+export const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";

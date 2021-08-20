@@ -1,5 +1,4 @@
 import * as types from './notificationActionTypes';
-import { bound } from './totallyLegitFunctions';
 
 export function markAsRead(index) {
     const type = types.MARK_AS_READ;
@@ -11,7 +10,33 @@ export function setNotificationFilter(filter) {
     return {type, filter};
 }
 
-const boundMarkAsRead = bound(markAsRead);
-const boundSetNotificationFilter = bound(setNotificationFilter);
+export function setLoadingState(state) {
+    const type = types.SET_LOADING_STATE;
+    return {type, state}
+}
 
-export {boundMarkAsRead, boundSetNotificationFilter};
+export function setNotifications(data) {
+    const type = types.FETCH_NOTIFICATIONS_SUCCESS;
+    return {type, data};
+}
+
+export function fetchNotifications() {
+    const promise = ping('notifications', true);
+
+    return (dispatch) => {
+        dispatch(setLoadingState(true));
+
+        promise
+        .then(res => res.json())
+        .then(data => {
+            console.log("Notifications", data);
+            dispatch(setNotifications(data));
+        })
+        .catch(err => {
+            console.log(`Error: ${err}`);
+        })
+        .finally(() => {
+            dispatch(setLoadingState(false));
+        });
+    };
+}
