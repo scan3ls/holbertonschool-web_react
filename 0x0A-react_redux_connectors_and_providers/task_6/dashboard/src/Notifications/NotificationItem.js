@@ -7,7 +7,7 @@ class NotificationItem extends React.PureComponent {
     }
 
     render() {
-        const {value, html, markAsRead, id} = this.props;
+        const {value, html, markAsRead, id, hidden} = this.props;
 
         let type;
         if (html) {
@@ -31,19 +31,21 @@ class NotificationItem extends React.PureComponent {
 
         return (
             (html)
-            ? <li className={priority} data-priority={type} onClick={() => {markAsRead(id)}} dangerouslySetInnerHTML={html}></li>
-            : <li className={priority} data-priority={type} onClick={() => {markAsRead(id)}}>{value}</li>
+            ? <li hidden={hidden} className={priority} data-priority={type} onClick={() => {markAsRead(id)}} dangerouslySetInnerHTML={html}></li>
+            : <li hidden={hidden} className={priority} data-priority={type} onClick={() => {markAsRead(id)}}>{value}</li>
         );
     }
 }
 
 const styles = StyleSheet.create({
     default: {
-        color: 'rgb(5, 29, 163)'
+        color: 'rgb(5, 29, 163)',
+        cursor: 'pointer'
     },
 
     urgent: {
-        color: 'rgb(211, 64, 64)'
+        color: 'rgb(211, 64, 64)',
+        cursor: 'pointer'
     },
 
     small: {

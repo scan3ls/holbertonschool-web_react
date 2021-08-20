@@ -7,7 +7,6 @@ const getNotifications = (state) => state.get('notifications');
 const getUnreadNotifications = (state) => {
     const notifications = getNotifications(state);
     const unread = notifications.filter(x => x.isRead == false);
-    console.log(unread);
     return unread;
 };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import closeIcon from './close-icon.png';
 import NotificationItem from './NotificationItem'; 
 import PropTypes from 'prop-types';
-// import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 import {connect} from 'react-redux';
 import * as actions from '../actions/notificationActionCreators';
+import * as selectors from '../selectors/notificationSelector';
 
 const button_style = {
     position: 'relative',
@@ -24,28 +24,31 @@ const img_style = {
 };
 
 function NotificationRows(props) {
-    const { notifications, markAsRead } = props;
+    const { notifications, markAsRead, unread } = props;
 
-    if (notifications.length === 0) return(
+    if (unread.length === 0) return(
         <NotificationItem
             type="defualt"
             value="No new notification for now"
         />
     );
+    
+    let index = 0;
 
-    return(
-        notifications.map(
-            (notification) =>
-                <NotificationItem
-                    key={notification.guid}
-                    id={notification.guid}
-                    type={notification.type}
-                    html={notification.html}
-                    value={notification.value}
-                    markAsRead={markAsRead}
-                />
-        )
-    );
+    const list = notifications.map(
+        (notification) => <NotificationItem
+                key={notification.guid}
+                id={index++}
+                guid={notification.guid}
+                type={notification.type}
+                html={notification.html}
+                value={notification.value}
+                markAsRead={markAsRead}
+                hidden={notification.isRead}
+            />
+    )
+
+    return(list);
 }
 
 class Notifications extends React.Component {
@@ -60,7 +63,7 @@ class Notifications extends React.Component {
 
     render() {
         const hidden = !this.props.displayDrawer;
-        const { notifications, markNotificationAsRead } = this.props;
+        const { notifications, markAsRead, unread } = this.props;
 
         const toggle = () => {
             if (this.props.displayDrawer) {
@@ -89,8 +92,10 @@ class Notifications extends React.Component {
                         <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
                         <ul className={css(styles.list)}>
                             <NotificationRows
-                                notifications={notifications} 
-                                markAsRead={markNotificationAsRead}/>
+                                notifications={notifications}
+                                markAsRead={markAsRead}
+                                unread={unread}
+                            />
                         </ul>
                     </div>
                 </div>
@@ -103,14 +108,16 @@ Notifications.propTypes = {
     notifications: PropTypes.array,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
-    markNotificationAsRead: PropTypes.func
+    markAsRead: PropTypes.func,
+    unread: PropTypes.array
 };
 
 Notifications.defaultProps = {
     notifications: [],
+    unread: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
-    markNotificationAsRead: () => {}
+    markAsRead: () => {}
 }
 
 const translateKeyframes = {
@@ -193,7 +200,9 @@ export function mapStateToProps(states) {
     const loading = state.get('loading');
     const notifications = state.get('notifications');
 
-    return {filter, loading, notifications};
+    const unread = selectors.getUnreadNotifications(state);
+
+    return {filter, loading, notifications, unread};
 }
 
 export default connect(mapStateToProps, actions)(Notifications);
