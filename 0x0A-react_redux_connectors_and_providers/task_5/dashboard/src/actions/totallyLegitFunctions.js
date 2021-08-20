@@ -1,11 +1,12 @@
 import * as user from '../../dist/login-success.json';
-import * as notifications from '../../dist/notifications.json';
+import { normalizeData } from '../schema/notifications';
 
 export function bound(func) {
     return func;
 }
 
 export function ping(any, getNotice = false) {
+    const notifications = Object.values(normalizeData.entities.messages);
     const response = {
         json: () => (getNotice ? notifications : user)
     }

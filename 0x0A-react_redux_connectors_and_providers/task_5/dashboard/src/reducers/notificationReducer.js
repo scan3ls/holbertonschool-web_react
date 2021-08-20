@@ -1,5 +1,4 @@
 import * as types from '../actions/notificationActionTypes';
-import { notificationsNormalizer, normalizeData } from '../schema/notifications';
 import { Map } from 'immutable';
 
 const initialState = Map({
@@ -13,8 +12,7 @@ export function notificationReducer(state = initialState, action) {
 
     switch (action.type) {
         case types.FETCH_NOTIFICATIONS_SUCCESS:
-            const data = notificationsNormalizer(action.data.map((item) => ({...item, isRead: false})));
-            const notifications = data.entities.notifications;
+            const notifications = action.data;
             return state.mergeDeep(Map({filter: "DEFAULT", notifications}));
 
         case types.MARK_AS_READ:

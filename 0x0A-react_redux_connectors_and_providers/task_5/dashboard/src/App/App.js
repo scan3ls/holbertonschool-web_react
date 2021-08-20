@@ -87,10 +87,8 @@ class App extends React.Component {
       <React.Fragment>
         <Notifications
           displayDrawer={displayDrawer}
-          listNotifications={listNotifications}
           handleDisplayDrawer={displayNotificationDrawer}
           handleHideDrawer={hideNotificationDrawer}
-          markNotificationAsRead={this.markNotificationAsRead}
         />
         <div className={css(styles.App)}>
           <Header />

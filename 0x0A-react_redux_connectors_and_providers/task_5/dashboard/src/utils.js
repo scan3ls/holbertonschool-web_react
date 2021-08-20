@@ -21,7 +21,7 @@ export const listCourses = [
 
 // dummy Notification data
 export const listNotifications = [
-    {id: 1, type:"default", value: "New course available"},
-    {id: 2, type: "urgent", value: "New course available"},
-    {id: 3, type: "urgent", value: "New course available", html: getLatestNotification()}
+    {id: 1, type:"default", value: "New course available", isRead: false},
+    {id: 2, type: "urgent", value: "New course available", isRead: false},
+    {id: 3, type: "urgent", value: "New course available", isRead: false, html: getLatestNotification()}
 ];

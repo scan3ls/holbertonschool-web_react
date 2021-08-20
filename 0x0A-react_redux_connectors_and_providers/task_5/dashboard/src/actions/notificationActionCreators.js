@@ -1,4 +1,5 @@
 import * as types from './notificationActionTypes';
+import {ping} from './totallyLegitFunctions';
 
 export function markAsRead(index) {
     const type = types.MARK_AS_READ;

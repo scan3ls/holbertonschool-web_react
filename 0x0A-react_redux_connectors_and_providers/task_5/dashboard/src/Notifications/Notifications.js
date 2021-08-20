@@ -2,8 +2,10 @@ import React from 'react';
 import closeIcon from './close-icon.png';
 import NotificationItem from './NotificationItem'; 
 import PropTypes from 'prop-types';
-import NotificationItemShape from './NotificationItemShape';
+// import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
+import {connect} from 'react-redux';
+import * as actions from '../actions/notificationActionCreators';
 
 const button_style = {
     position: 'relative',
@@ -22,9 +24,9 @@ const img_style = {
 };
 
 function NotificationRows(props) {
-    const { listNotifications, markAsRead } = props;
+    const { notifications, markAsRead } = props;
 
-    if (listNotifications.length === 0) return(
+    if (notifications.length === 0) return(
         <NotificationItem
             type="defualt"
             value="No new notification for now"
@@ -32,11 +34,11 @@ function NotificationRows(props) {
     );
 
     return(
-        listNotifications.map(
+        notifications.map(
             (notification) =>
                 <NotificationItem
-                    key={notification.id}
-                    id={notification.id}
+                    key={notification.guid}
+                    id={notification.guid}
                     type={notification.type}
                     html={notification.html}
                     value={notification.value}
@@ -52,9 +54,13 @@ class Notifications extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.fetchNotifications();
+    }
+
     render() {
         const hidden = !this.props.displayDrawer;
-        const { listNotifications, markNotificationAsRead } = this.props;
+        const { notifications, markNotificationAsRead } = this.props;
 
         const toggle = () => {
             if (this.props.displayDrawer) {
@@ -83,7 +89,7 @@ class Notifications extends React.Component {
                         <p className={css(styles.notifications_P)}>Here is the list of notifications</p>
                         <ul className={css(styles.list)}>
                             <NotificationRows
-                                listNotifications={listNotifications} 
+                                notifications={notifications} 
                                 markAsRead={markNotificationAsRead}/>
                         </ul>
                     </div>
@@ -94,14 +100,14 @@ class Notifications extends React.Component {
 }
 
 Notifications.propTypes = {
-    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    notifications: PropTypes.array,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
     markNotificationAsRead: PropTypes.func
 };
 
 Notifications.defaultProps = {
-    listNotifications: [],
+    notifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
     markNotificationAsRead: () => {}
@@ -181,4 +187,13 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Notifications;
+export function mapStateToProps(states) {
+    const state = states.notifications
+    const filter = state.get('filter');
+    const loading = state.get('loading');
+    const notifications = state.get('notifications');
+
+    return {filter, loading, notifications};
+}
+
+export default connect(mapStateToProps, actions)(Notifications);
