@@ -66,7 +66,8 @@ Header.defaultProps = {
   logout: () => {}
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(states) {
+  const state = states.ui;
   const isLoggedIn = state.get('isUserLoggedIn');
   const user = state.get('user');
   return {user, isLoggedIn};

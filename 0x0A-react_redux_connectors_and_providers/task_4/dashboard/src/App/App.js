@@ -139,8 +139,9 @@ App.defaultProps = {
   isLoggedIn: false
 }
 
-function mapStateToProps(state) {
-  const isLoggedIn = state.get('isUserLoggedIn');
+function mapStateToProps(states) {
+  const state = states.ui;
+  const isLoggedIn = state.get('isUserLoggedIn') ;
   const displayDrawer = state.get('isNotificationDrawerVisible');
   return {isLoggedIn, displayDrawer};
 }
