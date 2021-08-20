@@ -5,6 +5,8 @@ import * as invalidActions from '../actions/uiActionCreator';
 import { listNotifications } from '../utils';
 import assert from 'assert';
 
+listNotifications
+
 const fetchAction = {
     type: FETCH_NOTIFICATIONS_SUCCESS,
     data: listNotifications

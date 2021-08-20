@@ -20,27 +20,27 @@ describe('Selectors', () => {
 
     it('getNotifications', () => {
         const data = selectors.getNotifications(state);
+
         for (const item of listNotifications) {
             const {id, type, value} = item;
-            const notification = data[id];
+            const notification = data[id - 1];
             assert.equal(notification.type, type);
             assert.equal(notification.value, value);
         }
     });
 
     it('getUnreadNotifications', () => {
+        state = notificationReducer(state, actions.markAsRead(0));
         state = notificationReducer(state, actions.markAsRead(1));
-        state = notificationReducer(state, actions.markAsRead(2));
 
-        const unread = selectors.getUnreadNotifications(state).toJSON();
-        assert.equal(unread['1'], undefined);
-        assert.equal(unread['2'], undefined);
+        const unread = selectors.getUnreadNotifications(state);
+
 
         const [{id, type, value, html}] = listNotifications.filter(item => (item.id === 3));
-        assert.equal(unread['3'].isRead, false);
-        assert.equal(unread['3'].id, id);
-        assert.equal(unread['3'].type, type);
-        assert.equal(unread['3'].value, value);
-        assert.equal(unread['3'].html, html);
+        assert.equal(unread[0].isRead, false);
+        assert.equal(unread[0].id, id);
+        assert.equal(unread[0].type, type);
+        assert.equal(unread[0].value, value);
+        assert.equal(unread[0].html, html);
     });
 });
