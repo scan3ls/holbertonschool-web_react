@@ -9,15 +9,11 @@ import { rootReducer } from './reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-const {courses, notifications, ui} = rootReducer;
-
 const store = configureStore(
-  { reducer: {courses, notifications, ui} }, 
+  { reducer: rootReducer}, 
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 );
-
-console.log("store", store);
 
 ReactDOM.render(
   <Provider store={store}>
