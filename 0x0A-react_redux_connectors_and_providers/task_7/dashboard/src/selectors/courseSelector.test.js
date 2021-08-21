@@ -1,4 +1,4 @@
-import { getAll } from './courseSelector';
+import { getListCourses } from './courseSelector';
 import { courseReducer } from '../reducers/courseReducer';
 import * as actions from '../actions/courseActionCreators';
 import { listCourses } from '../utils';
@@ -8,8 +8,8 @@ const action = {type: "FETCH_COURSE_SUCCESS", data: listCourses};
 let state = courseReducer(undefined, action);
 
 describe('course Selector', () => {
-    it('getAll', () => {
-        const entities = getAll(state);
+    it('getListCourses', () => {
+        const entities = getListCourses(state);
         assert(entities.size, 2);
 
         const courses = entities.getIn(['0', 'courses'])

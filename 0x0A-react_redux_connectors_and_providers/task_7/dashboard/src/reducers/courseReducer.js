@@ -13,8 +13,6 @@ export function courseReducer(state = initialState, action) {
             const data = coursesNormalizer(action.data.map(
                 (course) => ({...course, isSelected: false}))
             );
-
-
             return state.merge(data);
 
         case types.SELECT_COURSE:

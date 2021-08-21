@@ -1,4 +1,4 @@
 
-export function getAll(state) {
+export function getListCourses(state) {
     return state.valueSeq();
 }

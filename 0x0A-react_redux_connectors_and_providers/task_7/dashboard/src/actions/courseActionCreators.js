@@ -1,5 +1,5 @@
 import * as types from './courseActionTypes';
-import { bound } from './totallyLegitFunctions';
+import { ping } from './totallyLegitFunctions';
 
 export function selectCourse(index) {
     const type = types.SELECT_COURSE;
@@ -11,7 +11,22 @@ export function unSelectCourse(index) {
     return {type: type, index: index};
 }
 
-const boundSelectCourse = bound(selectCourse);
-const boundUnSelectCourse = bound(unSelectCourse);
+export function setCourses(data) {
+    const type = types.FETCH_COURSE_SUCCESS;
+    return {type, data};
+}
 
-export {boundSelectCourse, boundUnSelectCourse};
+export function fetchCourses() {
+    const promise = ping('courses', false, true);
+    return (dispatch) => {
+        promise
+        .then(res => res.json())
+        .then(data => {
+            console.log('Courses: ', data);
+            dispatch(setCourses(data));
+        })
+        .catch(err => {
+            console.log(`Error: ${err}`);
+        });
+    };
+}
