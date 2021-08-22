@@ -9,7 +9,7 @@ export function courseReducer(state = initialState, action) {
 
     switch (action.type) {
         case types.FETCH_COURSE_SUCCESS:
-
+            console.log(action.data);
             const data = coursesNormalizer(action.data.map(
                 (course) => ({...course, isSelected: false}))
             );
@@ -19,7 +19,7 @@ export function courseReducer(state = initialState, action) {
             return state.setIn(['entities', 'courses', action.index, 'isSelected'], true);
 
         case types.UNSELECT_COURSE:
-            return state.setIn(['entities', 'courses', action.index, 'isSelected'], false);
+            return state.setIn(['entities', 'courses', `${action.index}`, 'isSelected'], false);
 
         default:
             return state;

@@ -22,7 +22,6 @@ export function fetchCourses() {
         promise
         .then(res => res.json())
         .then(data => {
-            console.log('Courses: ', data);
             dispatch(setCourses(data));
         })
         .catch(err => {

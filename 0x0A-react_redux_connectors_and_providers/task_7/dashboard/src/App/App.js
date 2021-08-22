@@ -21,7 +21,7 @@ function Body(props) {
     return (
       <div className="CourseBody">
         <BodySectionWithMarginBottom title="Course list">
-          <CourseList listCourses={listCourses}/>
+          <CourseList />
           <BodySection title="News from the school">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duisaute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa quiofficia deserunt mollit anim id est laborum.</p>
           </BodySection>

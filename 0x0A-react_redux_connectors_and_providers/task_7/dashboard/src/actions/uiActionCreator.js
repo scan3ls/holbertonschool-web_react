@@ -39,7 +39,6 @@ export function loginRequest(email, password) {
         return promise
         .then(res => res.json())
         .then(data => {
-            console.log(`Data: ${JSON.stringify(data, null, 2)}`);
             dispatch(loginSuccess());
         })
         .catch(err => {

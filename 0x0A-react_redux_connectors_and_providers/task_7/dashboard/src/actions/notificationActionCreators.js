@@ -30,7 +30,6 @@ export function fetchNotifications() {
         promise
         .then(res => res.json())
         .then(data => {
-            console.log("Notifications", data);
             dispatch(setNotifications(data));
         })
         .catch(err => {

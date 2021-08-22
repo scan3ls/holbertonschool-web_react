@@ -1,6 +1,5 @@
 import * as user from '../../dist/login-success.json';
 import { normalizeData } from '../schema/notifications';
-import { coursesNormalizer } from '../schema/courses';
 import * as courses from '../../dist/courses.json';
 
 export function bound(func) {
@@ -12,7 +11,7 @@ export function ping(any, getNotice = false, getCourses = false) {
 
     let data;
     if (getNotice) data = notifications;
-    else if (getCourses) data = courses;
+    else if (getCourses) data = courses.default;
     else data = user;
 
     const response = {
