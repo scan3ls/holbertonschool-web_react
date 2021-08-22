@@ -9,7 +9,6 @@ export function courseReducer(state = initialState, action) {
 
     switch (action.type) {
         case types.FETCH_COURSE_SUCCESS:
-            console.log(action.data);
             const data = coursesNormalizer(action.data.map(
                 (course) => ({...course, isSelected: false}))
             );
