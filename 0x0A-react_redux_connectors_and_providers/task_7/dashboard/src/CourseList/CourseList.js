@@ -1,6 +1,5 @@
 import React from 'react';
 import CourseListRow from './CourseListRow';
-import CourseShape from './CourseShape';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
@@ -13,7 +12,7 @@ function CourseRows(props) {
     if (listCourses.length === 0) return(
      <CourseListRow textFirstCell="No course available yet" onChangeRow={onChangeRow}/>
     );
-    console.log(listCourses);
+
     return(
         listCourses.map((course) =>
             <CourseListRow
@@ -71,7 +70,7 @@ class CourseList extends React.Component {
 }
 
 CourseList.propTypes = {
-    listCourses: PropTypes.arrayOf(CourseShape)
+    listCourses: PropTypes.array
 };
 
 CourseList.defaultProps = {
